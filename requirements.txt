@@ -5,6 +5,7 @@ descript-audiotools==0.7.2
 ffmpeg-python==0.2.0
 g2p-en==2.1.0
 gradio
+hf-xet
 huggingface_hub
 jieba==0.42.1
 json5==0.10.0
