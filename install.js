@@ -7,7 +7,36 @@ module.exports = {
       method: "shell.run",
       params: {
         message: [
-          "git clone https://huggingface.co/spaces/IndexTeam/IndexTTS-2-Demo app",
+          "git lfs install",
+          "git clone https://github.com/index-tts/index-tts app",
+        ]
+      }
+    },
+    {
+      method: "shell.run",
+      params: {
+        path: "app",
+        message: "git lfs pull"
+      }
+    },
+    {
+      method: "shell.run",
+      params: {
+        env: {
+          CONDA_AUTO_UPDATE_CONDA: "false"
+        },
+        message: [
+          "conda update -y -c conda-forge huggingface_hub",
+        ]
+      }
+    },
+    {
+      method: "shell.run",
+      params: {
+        path: "app",
+        message: [
+          "uv sync --extra webui",
+          'uv tool install "huggingface-hub[cli,hf_xet]"'
         ]
       }
     },
@@ -16,23 +45,18 @@ module.exports = {
       params: {
         uri: "torch.js",
         params: {
-          venv: "env",
+          venv: ".venv",
           path: "app",
           // xformers: true
-          // triton: true
-          // sageattention: true
         }
       }
     },
     {
       method: "shell.run",
       params: {
-        venv: "env",
         path: "app",
-        message: [
-          "uv pip install -r ../requirements.txt"
-        ]
+        message: "hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints"
       }
-    },
+    }
   ]
 }

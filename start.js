@@ -5,7 +5,7 @@ module.exports = {
       when: "{{platform === 'linux' && gpu === 'nvidia' && kernel.gpus && kernel.gpus.find(x => / 50.+/.test(x.model))}}",
       method: "shell.run",
       params: {
-        venv: "env",
+        venv: ".venv",
         env: { },
         path: "app",
         message: [
@@ -25,7 +25,7 @@ module.exports = {
       when: "{{gpu !== 'nvidia'}}",
       method: "shell.run",
       params: {
-        venv: "env",
+        venv: ".venv",
         env: { },
         path: "app",
         message: [
@@ -45,7 +45,7 @@ module.exports = {
       when: "{{gpu === 'nvidia'}}",
       method: "shell.run",
       params: {
-        venv: "env",
+        venv: ".venv",
         env: { },
         path: "app",
         message: [
