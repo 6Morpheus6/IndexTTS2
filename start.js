@@ -14,6 +14,9 @@ module.exports = {
         on: [{
           "event": "/http:\/\/\\S+/",
           "done": true
+        }, {
+          "event": "/error:/i",
+          "break": false
         }]
       },
       next: "uri"
@@ -31,6 +34,9 @@ module.exports = {
         on: [{
           "event": "/http:\/\/\\S+/",
           "done": true
+        }, {
+          "event": "/error:/i",
+          "break": false
         }]
       },
       next: "uri"
@@ -48,6 +54,9 @@ module.exports = {
         on: [{
           "event": "/http:\/\/\\S+/",
           "done": true
+        }, {
+          "event": "/error:/i",
+          "break": false
         }]
       },
       next: "uri"
