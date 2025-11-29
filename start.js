@@ -1,3 +1,8 @@
+const path = require("path");
+const pythonExe = path.join(__dirname, "app", ".venv", "Scripts", "python.exe"); 
+const cudaHome = process.env.CONDA_PREFIX
+  ? path.join(process.env.CONDA_PREFIX, "Library", "bin")
+  : process.env.CUDA_PATH || "";
 module.exports = {
   daemon: true,
   run: [
@@ -22,11 +27,13 @@ module.exports = {
       when: "{{gpu === 'nvidia'}}",
       method: "shell.run",
       params: {
+        build: true,
         venv: ".venv",
-        env: { },
+        env: { CUDA_HOME: cudaHome },
         path: "app",
         message: [
-          "python webui.py --host 127.0.0.1 --cuda_kernel",
+          `${pythonExe} -c "import importlib; m=importlib.import_module('indextts.BigVGAN.alias_free_activation.cuda.load'); m.load()"`,
+          `${pythonExe} webui.py --host 127.0.0.1 --cuda_kernel`
         ],
         on: [{
           "event": "/http:\/\/\\S+/",
