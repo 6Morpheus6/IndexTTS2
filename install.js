@@ -31,6 +31,16 @@ module.exports = {
       }
     },
     {
+      when: "{{platform === 'win32' && gpu === 'nvidia'}}",
+      method: "shell.run",
+      params: {
+        message: [
+          'mkdir "%CUDA_HOME%\\lib\\x64" 2>nul',
+          'copy /Y "%CUDA_HOME%\\lib\\*.lib" "%CUDA_HOME%\\lib\\x64\\" >nul 2>&1',
+        ]
+      }
+    },
+    {
       method: "shell.run",
       params: {
         path: "app",
