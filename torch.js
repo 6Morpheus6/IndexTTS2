@@ -18,7 +18,7 @@ module.exports = {
       "params": {
         "venv": "{{args && args.venv ? args.venv : null}}",
         "path": "{{args && args.path ? args.path : '.'}}",
-        "message": "uv pip install torch-directml torchaudio torchvision numpy==1.26.4 --force-reinstall"
+        "message": "uv pip install torch-directml torchaudio torchvision numpy==1.26.2 --force-reinstall"
       },
       "next": null
     },
@@ -29,7 +29,7 @@ module.exports = {
       "params": {
         "venv": "{{args && args.venv ? args.venv : null}}",
         "path": "{{args && args.path ? args.path : '.'}}",
-        "message": "uv pip install torch torchvision torchaudio numpy==1.26.4 --force-reinstall --no-deps"
+        "message": "uv pip install torch torchvision torchaudio numpy==1.26.2 --force-reinstall --no-deps"
       },
       "next": null
     },
@@ -44,17 +44,6 @@ module.exports = {
       },
       "next": null
     },
-    // linux nvidia RTX50 series
-    {
-      "when": "{{platform === 'linux' && gpu === 'nvidia' && kernel.gpus && kernel.gpus.find(x => / 50.+/.test(x.model))}}",
-      "method": "shell.run",
-      "params": {
-        "venv": "{{args && args.venv ? args.venv : null}}",
-        "path": "{{args && args.path ? args.path : '.'}}",
-        "message": "uv pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 {{args && args.xformers ? 'xformers' : ''}} --index-url https://download.pytorch.org/whl/cu128 --force-reinstall --no-deps"
-      },
-      "next": null
-    },
     // linux nvidia
     {
       "when": "{{platform === 'linux' && gpu === 'nvidia'}}",
@@ -62,7 +51,10 @@ module.exports = {
       "params": {
         "venv": "{{args && args.venv ? args.venv : null}}",
         "path": "{{args && args.path ? args.path : '.'}}",
-        "message": "uv pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 {{args && args.xformers ? 'xformers' : ''}} --index-url https://download.pytorch.org/whl/cu121 --force-reinstall --no-deps"
+        "message": [
+          "uv pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 {{args && args.xformers ? 'xformers' : ''}} --index-url https://download.pytorch.org/whl/cu128 --force-reinstall",
+          "uv pip install numpy==1.26.2"
+        ]
       },
       "next": null
     },
