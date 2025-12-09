@@ -46,7 +46,7 @@ module.exports = {
         path: "app",
         message: [
           "uv sync --extra webui",
-          'uv tool install "huggingface-hub[cli,hf_xet]"'
+          'uv tool install "huggingface-hub[hf_xet]"'
         ]
       }
     },
